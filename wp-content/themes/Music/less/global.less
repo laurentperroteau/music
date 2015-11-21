@@ -1,0 +1,134 @@
+//////////////////////////////////////////////////////////////
+//                                                          //
+//         Todos los estilos del tema Enfusion              //
+//                                                          //
+//////////////////////////////////////////////////////////////
+
+//IMPORTANTE: necesitamos compilar unicamente este fichero (importa todos los otros)
+
+//TABLE OF CONTENTS
+
+//01 - Mixins
+//02 - Normalize
+//03 - Diagnostics
+//04 - Variables
+//05 - Global 
+//06 - Layout and Background
+//07 - Snippets
+//08 - Header
+//09 - Content
+//10 - Footer
+//11 - Media Queries
+//12 - Conditional
+//13 - Print 
+
+//01 - Mixins: no quitar (es util si se usa un mixin, no se imprimira en el css de cualquier forma)
+@import "mixins.less";
+
+//02 - Reset
+@import "reset.less";
+
+//03 - Diagnostics: descomentar al final del proyecto (dignostica errores)
+//@import "diagnostics.less";
+
+
+///////////////////////////////////////////////////////////////////// 
+//  04 - Varibles
+////////////////////////////////////////////////////////////////////
+
+//para el layout
+@largeHeader:1366px;
+@largeContent:952px;
+@one_fourth:23.949579%;/
+@one_fourth_margin:1.400560%;
+
+//colores (son mas obscuras cuando el numero es mas grande)
+@rojo1:#a8bc00;//color hover de los links
+@rojo2:#a8bc00;//color de los titulares de apartados en columnas
+@rojo3:#a8bc00;//color de los links
+@rojo4:#a8bc00;//color de los textos del footer
+
+/*creo mixin para una fuente google fonts como open sans:
+ *hemos agreguado diferentes tipo de la misma fuente (en el header.php):
+ *"Open+Sans:400,300italic,600,700" pero tenemos que agregua font-weight:300 para usar la de light de 300:
+*/
+#openSans {
+  .lightItalic() {
+    font-weight: 300;
+    font-style:italic;
+  }
+  .regular() {
+    font-weight: 400;
+  }
+  .semiBold() {
+    font-weight: 600;
+  }
+  .bold() {
+    font-weight: 700;
+  }
+}
+//lo usaremos asi
+span {
+  #openSans > .lightItalic();
+}
+
+///////////////////////////////////////////////////////////////////// 
+//  05 - Global 
+////////////////////////////////////////////////////////////////////
+
+body{
+  font:normal 62.5%/2em Arial,Helvetica,sans-serif;
+  //poner 62.5% al body hace que 1em = 10px
+  
+  h1 {
+    font-size:3em;//=30px
+  }
+  
+  a {
+    color:@rojo1;
+    
+    &:hover {
+      color:@rojo4;
+    }
+    //el &: funcciona tambien con first-child etc...
+  }
+}
+
+/////////////////////////////////////////////////////////////////////
+
+// 06 - Layout and background
+@import "layout.less";
+
+
+// 07 - Snippets (estilos que se repiten diferentes lugares)
+@import "snippets.less";
+
+
+// 08 - Header
+@import "header.less";
+
+
+// 09 - Content (todos los contenidos especificos a ciertas paginas)
+@import "content.less";
+
+
+//////////////////////////////////////////////////////////////////// 
+// 10 - Footer
+////////////////////////////////////////////////////////////////////
+
+footer {
+
+}
+
+////////////////////////////////////////////////////////////////////
+
+//11 - Media Queries
+@import "media-queries.less";
+
+
+//12 - Conditional (estilos especificos a navegadores)
+@import "conditional.less";
+
+
+//12 - Print: estilos para impresion (muy pequeño)
+@import "print.less";

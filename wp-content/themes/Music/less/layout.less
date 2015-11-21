@@ -1,0 +1,50 @@
+//////////////////////////////////////////////////////////////
+//                                                          //
+//                Layout and background                     //
+//                                                          //
+//////////////////////////////////////////////////////////////
+
+body {
+  /*overflow:hidden;
+  margin: 0 auto;
+  text-align:center;*/
+  
+  //para contenido centrado
+  .inside, #main {
+    /*position:relative;
+    margin: 0 auto;
+    max-width:@main;
+    padding:0 @paddingExt;
+    text-align:left;*/
+  }
+  
+  header {
+  }
+  
+  .sidebar {
+  }
+  
+  #content {
+  }
+  
+  footer {
+    clear:both;
+    text-align:left;
+  }
+
+} 
+
+/***
+  * Aqui un ejemplo de lo que podemos hacer con less para el layout:
+  * @one_fourth es una variable definida en el global.less
+  * con el "&" dentro de una class, le agreguar estilos.
+  */
+.one_fourth, .four-col > li {
+  width:@one_fourth;
+  margin-right:@one_fourth_margin;
+  float:left;
+  
+  &:first-child {
+    margin-left:0
+  }
+}
