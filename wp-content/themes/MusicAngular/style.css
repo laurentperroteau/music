@@ -1,0 +1,392 @@
+/*  
+Theme Name: Enfusion
+Description: Child themes de Tweenty Eleven
+Author: laurentperroteau.com
+Template:twentyeleven
+Version:0.3
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,400italic);
+
+/*global*/
+html {
+  font:normal 62.5%/2em 'Lato',sans-serif;
+  font-family: 'Lato', sans-serif;
+}
+
+html {
+    height: 100%;
+}
+  
+body {
+    overflow-x: hidden;
+    font-size:1.4em; font-weight: 400; color: #555;
+}
+  
+h1 {
+    margin-bottom: 15px;
+    font-size: 2.5em; font-weight: 300; color: #333; text-transform: uppercase;
+    text-align: center; letter-spacing: -0.1em; word-spacing: 0.3em;
+}
+
+p {
+    margin-bottom: 15px;
+    line-height: 1.2em;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    display: none;
+    max-width: 100%;
+    position: absolute;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+/*#content > ul li:nth-child(odd) {
+    color: #333;
+}
+
+#content > ul li:nth-child(even) {
+    margin-bottom: 10px;
+}
+
+body {
+    text-align: center;
+    -webkit-transition: all 0.5s ease;
+       -moz-transition: all 0.5s ease;
+         -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+}*/
+
+/*content*/
+/*#primary {
+    position: relative;
+    width: 350px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#content {
+    position: fixed; bottom: 100px;
+    width: 350px;
+    padding: 25px;
+    background: #eee; border: 2px solid black; 
+    text-align: left;
+}
+
+#content > p {
+    max-height: 0; opacity: 0;
+    -webkit-transition: all 0.5s ease;
+       -moz-transition: all 0.5s ease;
+         -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+}
+
+#content:hover > p {
+    max-height: 150px; opacity: 1;
+}
+
+audio {
+    display: block;
+    margin: 15px auto 5px;
+}
+
+#nav-single {
+    margin-bottom: 15px;
+}
+
+#nav-single .nav-next {
+    float: right;
+}
+
+#comments {
+    position: relative;
+    margin-top: 20px;
+    color: #333;
+}
+
+#comments article { display: none }
+
+#comments .comment-content {
+    font-style: italic;
+}*/
+
+/* tooltip */
+/*.tooltip {
+    display: none;
+    position: absolute; left: 0; top: 0;
+    padding: 25px;
+    background: #eee; border: 2px solid black;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    font-style: italic;
+}
+
+#respond {
+    display: none;
+}
+
+.home .reply { margin-top: 20px;}
+
+#respond #reply-title,
+#respond label[for=comment],
+#respond .comment-notes,
+#respond .comment-form-email,
+#respond .comment-form-url {
+    display: none;
+}
+
+#respond form {
+    display: block;
+}
+
+#respond textarea {
+    width: 350px;
+}
+
+#respond .form-allowed-tags {
+    display: none;
+}
+
+#respond .form-submit {
+    margin: 0;
+}*/
+
+/*sidebar*/
+/*#secondary {
+    position: absolute; right: -250px;
+    width: 250px; height: 100%;
+    padding: 25px 0;
+    background: rgba(255, 255, 255, 0.8); border-left: 2px solid black;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    box-sizing: border-box; 
+    text-align: left;
+    -webkit-transition: all 0.5s ease;
+       -moz-transition: all 0.5s ease;
+         -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+}
+
+#secondary h3 {
+    margin-bottom: 10px;
+    font-size: 1.5em; font-weight: 300; color: #333; text-transform: uppercase;
+    text-align: center; letter-spacing: -0.1em;
+}
+
+#secondary li {
+    list-style: square inside;
+    margin-left: 25px; 
+    color: #333;
+}
+
+.more {
+    position: absolute; right: 20px; bottom: 20px;
+    padding: 4px 10px 6px;
+    background: #eee; border: 2px solid black; 
+}*/
+
+
+/*ie*/
+/*.gte8 audio {
+    max-width: 300px;
+}*/
+
+/*
+Animate.css - http://daneden.me/animate
+*/
+
+/*.animated {
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    -ms-animation-duration: 0.5s;
+    -o-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+}
+
+.animated.hinge {
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    -ms-animation-duration: 2s;
+    -o-animation-duration: 2s;
+    animation-duration: 2s;
+}
+
+@-webkit-keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(-20px);
+    }
+    
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@-moz-keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        -moz-transform: translateX(-20px);
+    }
+    
+    100% {
+        opacity: 1;
+        -moz-transform: translateX(0);
+    }
+}
+
+@-o-keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        -o-transform: translateX(-20px);
+    }
+    
+    100% {
+        opacity: 1;
+        -o-transform: translateX(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fadeInLeft {
+    -webkit-animation-name: fadeInLeft;
+    -moz-animation-name: fadeInLeft;
+    -o-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+}
+@-webkit-keyframes fadeOutRight {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+    
+    100% {
+        opacity: 0;
+        -webkit-transform: translateX(20px);
+    }
+}
+
+@-moz-keyframes fadeOutRight {
+    0% {
+        opacity: 1;
+        -moz-transform: translateX(0);
+    }
+    
+    100% {
+        opacity: 0;
+        -moz-transform: translateX(20px);
+    }
+}
+
+@-o-keyframes fadeOutRight {
+    0% {
+        opacity: 1;
+        -o-transform: translateX(0);
+    }
+    
+    100% {
+        opacity: 0;
+        -o-transform: translateX(20px);
+    }
+}
+
+@keyframes fadeOutRight {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    100% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+}
+
+.fadeOutRight {
+    -webkit-animation-name: fadeOutRight;
+    -moz-animation-name: fadeOutRight;
+    -o-animation-name: fadeOutRight;
+    animation-name: fadeOutRight;
+}
+*/
