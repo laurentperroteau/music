@@ -15,19 +15,21 @@
 
 get_header(); ?>
 
-		<div id="container">
-			<div id="content" role="main">
+    <style>.wp-playlist { display: none }</style>
 
-			<?php
-			/*
-			 * Run the loop to output the posts.
-			 * If you want to overload this in a child theme then include a file
-			 * called loop-index.php and that will be used instead.
-			 */
-			// get_template_part( 'loop', 'index' );
-			?>
-			</div><!-- #content -->
-		</div><!-- #container -->
+    <div ng-controller="TestApi as test">
 
-<?php // get_sidebar(); ?>
+        {{ test.post.title.rendered }}
+        
+        <div ng-bind-html="test.content"></div>
+
+        <!--<ul>
+            <li ng-repeat="post in test.posts">
+                {{ post.title.rendered }}
+            </li>
+        </ul>-->
+    </div>
+
+
+    Pour récupérer le media, voir _links.http://api.w.org/featuredmedia[0].href
 <?php get_footer(); ?>

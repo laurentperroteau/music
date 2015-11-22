@@ -17,8 +17,23 @@
 /////////////////////////////////////////////////////////
 //session_save_path('/home/content/65/9646665/html/sess');
 
+/*function addPostToJson( $example ) {
+
+        $data = array();
+
+        $data['customMeta'] = array(
+            'fichierMp3' => get_post_meta( $post->ID, 'fichier_mp3', true )
+        );
+
+        return $data;
+    }
+    add_filter( 'json_prepare_post', 'addPostToJson', 10, 3);*
 
 
+/***
+ * Aqui se pone los custom field para los post y las page
+ */
+include 'inc/custom-meta.php';
 
 /***
  * Incluir todos los ficheros que deberian estar en el function.php
@@ -57,10 +72,12 @@ function enfusion_scripts()  {
      * @param $in_footer: si queremos se ponga en el footer (muy recomendado)
      */
     //wp_register_script( 'fancy', get_bloginfo('stylesheet_directory') . '/js/jquery.fancybox.pack.js', array('jquery'), '2012.10.13', true );
-    wp_register_script( 'script', get_bloginfo('stylesheet_directory') . '/bower_components/angular/angular.min.js');
+    wp_register_script( 'angular', get_bloginfo('stylesheet_directory') . '/bower_components/angular/angular.min.js');
+    wp_register_script( 'controller', get_bloginfo('stylesheet_directory') . '/js/controller/controllers.js');
   
     // Ahora usamos un tag condicional por agreguarlo en cola
-    wp_enqueue_script( 'script' ); 
+    wp_enqueue_script( 'angular' ); 
+    wp_enqueue_script( 'controller' ); 
     //wp_enqueue_script( 'fancy' ); 
 }  
 add_action( 'wp_enqueue_scripts', 'enfusion_scripts' ); 
