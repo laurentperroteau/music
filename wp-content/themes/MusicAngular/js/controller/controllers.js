@@ -12,50 +12,153 @@ app.factory('WpApi', function ($http) {
         });
     };
 
+    var getImage = function( imageId ) {
+
+        var param = imageId === undefined ? '': '/'+ imageId;
+
+        return $http({
+            url: 'http://music.local/wp-json/wp/v2/media'+ param, 
+            method: 'GET'
+        });
+    };
+
     return {
-        albums: getAlbums
+        albums: getAlbums,
+        image: getImage
     }
 });
+
+
+app.factory('audio',function () {
+  return {
+    setAndPlay: function( audioElement, filename ) {
+        audioElement.src = filename;
+        audioElement.play();
+    },
+    play: function( audioElement ) {
+        audioElement.play(); 
+    },
+    pause: function( audioElement ) {
+        audioElement.pause(); 
+    }
+  }
+});
+
+app.directive('imageonload', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('load', function() {
+                scope.$apply(attrs.imageonload);
+            });
+        }
+    };
+});
+
 
 app.controller('TestApi', function (
     $scope,
     $sce, 
-    WpApi
+    WpApi,
+    audio,
+    $document
 ){
 
     var _this = this;
+    _this.audioElement = null;
+    _this.currentAudio = null;
+    _this.image;
+    _this.imageLoaded = false;
 
     WpApi.albums().then( function (response) {
 
         _this.posts = response.data;
-
-        // console.log( _this.posts );
-
+        console.log( _this.posts );
+        getFirstPost();
     });
 
+    function getFirstPost() {
+        console.log( 'getFirstPost' );
 
-    WpApi.albums( 378 ).then( function (response) {
+        displayPost( _this.posts[0].id );
+    }
 
-        _this.post = response.data;
+    function displayPost( id ) {
+        console.log( 'displayPost' );
 
-        // console.log( _this.post );
+        WpApi.albums( id ).then( function (response) {
 
-        _this.content = $sce.trustAsHtml( _this.post.content.rendered );
+            _this.post = response.data;
 
-        parseContent( _this.post.content.rendered );
-    });
+            _this.content = $sce.trustAsHtml( _this.post.content.rendered );
 
-    function parseContent( sContent ) {
+            getTrackInWpContent( _this.post.content.rendered );
+
+            _this.imageLoaded = false;
+
+            WpApi.image( _this.post.featured_image ).then( function (response) {
+
+                _this.image = response.data.source_url;
+            });
+        });
+    }
+
+    function getTrackInWpContent( sContent ) {
+        console.log( 'getTrackInWpContent' );
 
         $content = angular.element( sContent );
-        console.log( $content );
-        console.log( $content[2].querySelector('.wp-playlist-script') );
+
+        if( !$content[2].querySelector('.wp-playlist-script') ) return false;
+
         var sData = $content[2].querySelector('.wp-playlist-script').innerHTML;
 
         var oData = JSON.parse( sData );
 
-        console.log( oData.tracks[0].src );
+        _this.currentAudio = oData.tracks[0].src;
+    }
 
 
+    _this.play = function() {
+        console.log( 'play' );
+
+        if( _this.audioElement === null ) {
+
+            _this.audioElement = $document[0].createElement('audio');
+
+            console.log( _this.audioElement, _this.currentAudio );
+
+            audio.setAndPlay( _this.audioElement, _this.currentAudio );
+        }
+        else {
+            audio.play( _this.audioElement );
+        }
+    };
+
+    _this.pause = function() {
+        console.log( 'pause' );
+
+        if( _this.audioElement === null ) return false;
+
+        audio.pause( _this.audioElement );
+    };
+
+    // Mettre un loader au clic sur next (le temps de charger l'image)
+    _this.next = function( id ) {
+        console.log( 'next' );
+
+        displayPost( id );
+    };
+
+    $scope.newImageLoaded = function() {
+        console.log( 'newImageLoaded' );
+        
+        _this.imageLoaded = true;
+        _this.showNewMix();
+    }
+
+    _this.showNewMix = function() {
+        console.log( 'showNewMix' );
+
+        _this.play();
     }
 });

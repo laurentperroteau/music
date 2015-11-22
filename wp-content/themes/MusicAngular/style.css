@@ -95,11 +95,11 @@ a:hover {
     text-decoration: underline;
 }
 
-img {
+/*img {
     display: none;
     max-width: 100%;
     position: absolute;
-}
+}*/
 
 li {
     margin-bottom: 5px;

@@ -23,11 +23,21 @@ get_header(); ?>
         
         <div ng-bind-html="test.content"></div>
 
-        <!--<ul>
+        <button ng-click="test.play()">Play</button>
+        <button ng-click="test.pause()">Pause</button>
+        <button ng-click="test.next( 367 )">Next</button>
+
+        <!--<audio controls="controls" audioplayer>
+          <source type="audio/mpeg" ng-src="{{ test.currentSong }}"/>
+        </audio>-->
+
+        <img src="{{ test.image }}" imageonload="newImageLoaded()" />
+
+        <ul>
             <li ng-repeat="post in test.posts">
                 {{ post.title.rendered }}
             </li>
-        </ul>-->
+        </ul>
     </div>
 
 
