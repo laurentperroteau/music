@@ -15,7 +15,16 @@
 
 get_header(); ?>
 
-    <style>.wp-playlist { display: none }</style>
+    <style>
+        .wp-playlist { display: none }
+        audio {
+            background-color: red;
+            width: 100%;
+            box-shadow: 5px 5px 5px yellow;
+            border: 15px solid black;
+            font-size: 20px;
+        }
+    </style>
 
     <div ng-controller="TestApi as test">
 
@@ -38,6 +47,7 @@ get_header(); ?>
                 {{ post.title.rendered }}
             </li>
         </ul>
+        <div id="ctrlAudio"></div>
     </div>
 
 

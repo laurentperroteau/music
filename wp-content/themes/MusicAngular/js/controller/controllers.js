@@ -106,32 +106,47 @@ app.controller('TestApi', function (
     function getTrackInWpContent( sContent ) {
         console.log( 'getTrackInWpContent' );
 
-        $content = angular.element( sContent );
+        aContent = angular.element( sContent );
 
-        if( !$content[2].querySelector('.wp-playlist-script') ) return false;
+        angular.forEach(aContent, function(elems, key) {
 
-        var sData = $content[2].querySelector('.wp-playlist-script').innerHTML;
+            if( elems.nodeType === 1 ) {
 
-        var oData = JSON.parse( sData );
+                if( elems.querySelector('.wp-playlist-script') ) {
 
-        _this.currentAudio = oData.tracks[0].src;
+                    var sData = elems.querySelector('.wp-playlist-script').innerHTML;
+                    
+                    var oData = JSON.parse( sData );
+
+                    _this.currentAudio = oData.tracks[0].src;
+
+                    console.log( _this.currentAudio );
+                }
+            }
+        });
     }
 
 
-    _this.play = function() {
-        console.log( 'play' );
+    _this.setAndPlay = function() {
+        console.log( 'setAndPlay' );
 
         if( _this.audioElement === null ) {
 
             _this.audioElement = $document[0].createElement('audio');
+            _this.audioElement.setAttribute('controls',true)
+
+            document.getElementById('ctrlAudio').appendChild(_this.audioElement);
 
             console.log( _this.audioElement, _this.currentAudio );
+        }
 
-            audio.setAndPlay( _this.audioElement, _this.currentAudio );
-        }
-        else {
-            audio.play( _this.audioElement );
-        }
+        audio.setAndPlay( _this.audioElement, _this.currentAudio );
+    };
+
+    _this.play = function() {
+        console.log( 'play' );
+
+        audio.play( _this.audioElement );
     };
 
     _this.pause = function() {
@@ -143,6 +158,8 @@ app.controller('TestApi', function (
     };
 
     // Mettre un loader au clic sur next (le temps de charger l'image)
+    // http://tympanus.net/Tutorials/CircularProgressButton/
+    // peut-être pas, puisque ouverture du menu en full page ???
     _this.next = function( id ) {
         console.log( 'next' );
 
@@ -159,6 +176,6 @@ app.controller('TestApi', function (
     _this.showNewMix = function() {
         console.log( 'showNewMix' );
 
-        _this.play();
+        _this.setAndPlay();
     }
 });
