@@ -54,4 +54,4 @@
 ?>
 </head>
 
-<body <?php body_class(); ?> ng-app="musicApp">
+<body ng-app="musicApp" class="wrapper">

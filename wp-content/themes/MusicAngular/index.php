@@ -1,19 +1,4 @@
-<?php
-/**
- * Main template file
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- * Learn more: https://codex.wordpress.org/Template_Hierarchy
- *
- * @package WordPress
- * @subpackage Twenty_Ten
- * @since Twenty Ten 1.0
- */
-
-get_header(); ?>
+<?php get_header(); ?>
 
     <style>
         .wp-playlist { display: none }
@@ -24,32 +9,56 @@ get_header(); ?>
             border: 15px solid black;
             font-size: 20px;
         }
+        .wrapper {
+            width: 100%;
+            height: 100%;
+        }
+        .bgi {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            -webkit-filter: brightness(1);
+            -moz-filter: brightness(1);
+            filter: brightness(1);
+            -webkit-transition: -webkit-filter 500ms linear;
+            -moz-transition: -moz-filter 500ms linear;
+        }
+        .bgi.ctrlApplyFilter {
+            -webkit-filter: brightness(10);
+            -moz-filter: brightness(10);
+        }
     </style>
 
-    <div ng-controller="TestApi as test">
+    <div ng-controller="MusicApi as music" class="wrapper">
 
-        {{ test.post.title.rendered }}
-        
-        <div ng-bind-html="test.content"></div>
+        <img
+            style="display: none"
+            src="{{ music.image }}" 
+            imageonload="newImageLoaded()" />
 
-        <button ng-click="test.play()">Play</button>
-        <button ng-click="test.pause()">Pause</button>
-        <button ng-click="test.next( 367 )">Next</button>
+        <div 
+            ng-style="music.imageBackground"
+            class="bgi"
+            ng-class="{'ctrlApplyFilter': music.bgiApplyFilter}"></div>
+            
+        <button ng-click="music.play()">Play</button>
+        <button ng-click="music.pause()">Pause</button>
 
-        <!--<audio controls="controls" audioplayer>
-          <source type="audio/mpeg" ng-src="{{ test.currentSong }}"/>
-        </audio>-->
+        <div class="content">
+            <select
+                ng-model="music.itemSelect"
+                ng-options="post as post.title.rendered for post in music.posts track by post.id"
+                ng-change="music.updateSelect()">
+            </select>
+            
+            <div ng-bind-html="music.content"></div>
 
-        <img src="{{ test.image }}" imageonload="newImageLoaded()" />
-
-        <ul>
-            <li ng-repeat="post in test.posts">
-                {{ post.title.rendered }}
-            </li>
-        </ul>
-        <div id="ctrlAudio"></div>
+            <div id="ctrlAudio"></div>
+        </div>
     </div>
 
 
-    Pour récupérer le media, voir _links.http://api.w.org/featuredmedia[0].href
 <?php get_footer(); ?>

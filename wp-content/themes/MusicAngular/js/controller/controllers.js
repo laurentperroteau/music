@@ -56,19 +56,24 @@ app.directive('imageonload', function() {
 });
 
 
-app.controller('TestApi', function (
+app.controller('MusicApi', function (
     $scope,
     $sce, 
     WpApi,
     audio,
-    $document
+    $document,
+    $timeout,
+    $interval
 ){
 
     var _this = this;
     _this.audioElement = null;
     _this.currentAudio = null;
-    _this.image;
+    _this.image        = null;
     _this.imageLoaded = false;
+    _this.bgiApplyFilter = false;
+    bStopGetOffSound = false;
+
 
     WpApi.albums().then( function (response) {
 
@@ -81,10 +86,13 @@ app.controller('TestApi', function (
         console.log( 'getFirstPost' );
 
         displayPost( _this.posts[0].id );
+
+        _this.itemSelect = _this.posts[0];
     }
 
     function displayPost( id ) {
         console.log( 'displayPost' );
+
 
         WpApi.albums( id ).then( function (response) {
 
@@ -99,6 +107,7 @@ app.controller('TestApi', function (
             WpApi.image( _this.post.featured_image ).then( function (response) {
 
                 _this.image = response.data.source_url;
+                _this.bgiApplyFilter = true;
             });
         });
     }
@@ -121,6 +130,8 @@ app.controller('TestApi', function (
                     _this.currentAudio = oData.tracks[0].src;
 
                     console.log( _this.currentAudio );
+
+                    _this.setAndPlay();
                 }
             }
         });
@@ -157,25 +168,20 @@ app.controller('TestApi', function (
         audio.pause( _this.audioElement );
     };
 
-    // Mettre un loader au clic sur next (le temps de charger l'image)
-    // http://tympanus.net/Tutorials/CircularProgressButton/
-    // peut-être pas, puisque ouverture du menu en full page ???
-    _this.next = function( id ) {
-        console.log( 'next' );
+    _this.updateSelect = function() {
 
-        displayPost( id );
+        console.log( 'stop sound' );
+
+        _this.setAndPlay();
+        displayPost( _this.itemSelect.id );
     };
 
     $scope.newImageLoaded = function() {
         console.log( 'newImageLoaded' );
         
         _this.imageLoaded = true;
-        _this.showNewMix();
-    }
 
-    _this.showNewMix = function() {
-        console.log( 'showNewMix' );
-
-        _this.setAndPlay();
-    }
+        _this.imageBackground = {'background': 'url('+ _this.image +') repeat center center'};
+        _this.bgiApplyFilter = false;
+    };
 });
