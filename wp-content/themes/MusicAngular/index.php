@@ -24,8 +24,8 @@
             
             <div ng-bind-html="music.content"></div>
 
-            <div id="ctrlAudio"></div>
         </div>
+        <div id="ctrlAudio" class="audio"></div>
     </div>
 
 

@@ -9,7 +9,7 @@
  * @since Twenty Ten 1.0
  */
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> style="margin: 0 !important">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <title><?php
