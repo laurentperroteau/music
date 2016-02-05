@@ -29,6 +29,7 @@
         .bgi.ctrlApplyFilter {
             -webkit-filter: brightness(10);
             -moz-filter: brightness(10);
+            filter: brightness(10);
         }
     </style>
 

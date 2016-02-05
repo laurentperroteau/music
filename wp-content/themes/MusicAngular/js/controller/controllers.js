@@ -72,7 +72,10 @@ app.controller('MusicApi', function (
     _this.image        = null;
     _this.imageLoaded = false;
     _this.bgiApplyFilter = false;
-    bStopGetOffSound = false;
+    _this.bgTransition = 500;
+
+    var waitLoadImage = 0;
+    var waitLoadImageInterval = null;
 
 
     WpApi.albums().then( function (response) {
@@ -172,16 +175,57 @@ app.controller('MusicApi', function (
 
         console.log( 'stop sound' );
 
+        waitLoadImageInterval = $interval(function() {
+            waitLoadImage += 100;
+        }, 100);
+
         _this.setAndPlay();
         displayPost( _this.itemSelect.id );
     };
 
     $scope.newImageLoaded = function() {
-        console.log( 'newImageLoaded' );
-        
-        _this.imageLoaded = true;
 
-        _this.imageBackground = {'background': 'url('+ _this.image +') repeat center center'};
-        _this.bgiApplyFilter = false;
+        /*
+            Interval is setting on change and filter 
+            transition is launched :
+            - wait end transition to show image
+            - except firt time of course
+         */
+        if( waitLoadImage > 0 ) {
+
+            var iTrans = _this.bgTransition * 2;
+
+            console.log( '----------- '+ waitLoadImage );
+
+            if( waitLoadImage < iTrans ) {
+
+                console.log( 'wait before load image' );
+                $timeout(function() {
+
+                    cancelWait();
+                }, iTrans - waitLoadImage);
+            }
+            else {
+                cancelWait();
+            }
+        }
+        else {
+            cancelWait();
+            showImage();
+        }
+
+        
+        function cancelWait() {
+            $interval.cancel( waitLoadImageInterval );
+            waitLoadImage = 0;
+            showImage();
+        }
+
+        function showImage() {
+
+            _this.imageLoaded = true;
+            _this.imageBackground = {'background': 'url('+ _this.image +') repeat center center'};
+            _this.bgiApplyFilter = false;
+        }
     };
 });
