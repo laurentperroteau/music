@@ -157,219 +157,37 @@ audio {
     font-style: italic;
 }
 
-/* tooltip */
-/*.tooltip {
-    display: none;
-    position: absolute; left: 0; top: 0;
-    padding: 25px;
-    background: #eee; border: 2px solid black;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    font-style: italic;
+.wp-playlist { display: none }
+
+audio {
+    background-color: red;
+    width: 100%;
+    box-shadow: 5px 5px 5px yellow;
+    border: 15px solid black;
+    font-size: 20px;
 }
 
-#respond {
-    display: none;
+.wrapper {
+    width: 100%;
+    height: 100%;
 }
 
-.home .reply { margin-top: 20px;}
-
-#respond #reply-title,
-#respond label[for=comment],
-#respond .comment-notes,
-#respond .comment-form-email,
-#respond .comment-form-url {
-    display: none;
+.bgi {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    -webkit-filter: brightness(1);
+    -moz-filter: brightness(1);
+    filter: brightness(1);
+    -webkit-transition: -webkit-filter 500ms linear;
+    -moz-transition: -moz-filter 500ms linear;
 }
 
-#respond form {
-    display: block;
+.bgi.ctrlApplyFilter {
+    -webkit-filter: brightness(10);
+    -moz-filter: brightness(10);
+    filter: brightness(10);
 }
-
-#respond textarea {
-    width: 350px;
-}
-
-#respond .form-allowed-tags {
-    display: none;
-}
-
-#respond .form-submit {
-    margin: 0;
-}*/
-
-/*sidebar*/
-/*#secondary {
-    position: absolute; right: -250px;
-    width: 250px; height: 100%;
-    padding: 25px 0;
-    background: rgba(255, 255, 255, 0.8); border-left: 2px solid black;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box; 
-    box-sizing: border-box; 
-    text-align: left;
-    -webkit-transition: all 0.5s ease;
-       -moz-transition: all 0.5s ease;
-         -o-transition: all 0.5s ease;
-            transition: all 0.5s ease;
-}
-
-#secondary h3 {
-    margin-bottom: 10px;
-    font-size: 1.5em; font-weight: 300; color: #333; text-transform: uppercase;
-    text-align: center; letter-spacing: -0.1em;
-}
-
-#secondary li {
-    list-style: square inside;
-    margin-left: 25px; 
-    color: #333;
-}
-
-.more {
-    position: absolute; right: 20px; bottom: 20px;
-    padding: 4px 10px 6px;
-    background: #eee; border: 2px solid black; 
-}*/
-
-
-/*ie*/
-/*.gte8 audio {
-    max-width: 300px;
-}*/
-
-/*
-Animate.css - http://daneden.me/animate
-*/
-
-/*.animated {
-    -webkit-animation-fill-mode: both;
-    -moz-animation-fill-mode: both;
-    -ms-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation-duration: 0.5s;
-    -moz-animation-duration: 0.5s;
-    -ms-animation-duration: 0.5s;
-    -o-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-}
-
-.animated.hinge {
-    -webkit-animation-duration: 2s;
-    -moz-animation-duration: 2s;
-    -ms-animation-duration: 2s;
-    -o-animation-duration: 2s;
-    animation-duration: 2s;
-}
-
-@-webkit-keyframes fadeInLeft {
-    0% {
-        opacity: 0;
-        -webkit-transform: translateX(-20px);
-    }
-    
-    100% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-    }
-}
-
-@-moz-keyframes fadeInLeft {
-    0% {
-        opacity: 0;
-        -moz-transform: translateX(-20px);
-    }
-    
-    100% {
-        opacity: 1;
-        -moz-transform: translateX(0);
-    }
-}
-
-@-o-keyframes fadeInLeft {
-    0% {
-        opacity: 0;
-        -o-transform: translateX(-20px);
-    }
-    
-    100% {
-        opacity: 1;
-        -o-transform: translateX(0);
-    }
-}
-
-@keyframes fadeInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.fadeInLeft {
-    -webkit-animation-name: fadeInLeft;
-    -moz-animation-name: fadeInLeft;
-    -o-animation-name: fadeInLeft;
-    animation-name: fadeInLeft;
-}
-@-webkit-keyframes fadeOutRight {
-    0% {
-        opacity: 1;
-        -webkit-transform: translateX(0);
-    }
-    
-    100% {
-        opacity: 0;
-        -webkit-transform: translateX(20px);
-    }
-}
-
-@-moz-keyframes fadeOutRight {
-    0% {
-        opacity: 1;
-        -moz-transform: translateX(0);
-    }
-    
-    100% {
-        opacity: 0;
-        -moz-transform: translateX(20px);
-    }
-}
-
-@-o-keyframes fadeOutRight {
-    0% {
-        opacity: 1;
-        -o-transform: translateX(0);
-    }
-    
-    100% {
-        opacity: 0;
-        -o-transform: translateX(20px);
-    }
-}
-
-@keyframes fadeOutRight {
-    0% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    
-    100% {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-}
-
-.fadeOutRight {
-    -webkit-animation-name: fadeOutRight;
-    -moz-animation-name: fadeOutRight;
-    -o-animation-name: fadeOutRight;
-    animation-name: fadeOutRight;
-}
-*/
