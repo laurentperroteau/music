@@ -15,7 +15,9 @@
         <button ng-click="music.play()">Play</button>
         <button ng-click="music.pause()">Pause</button>
 
-        <div class="content">
+        <div 
+            class="content"
+            ng-class="{'ctrlWait': music.wait }">
             <div ng-bind-html="music.content"></div>
 
             <select

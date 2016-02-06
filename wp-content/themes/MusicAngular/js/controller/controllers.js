@@ -73,6 +73,7 @@ app.controller('MusicApi', function (
     _this.imageLoaded = false;
     _this.bgiApplyFilter = false;
     _this.bgTransition = 500;
+    _this.wait = true;
 
     var waitLoadImage = 0;
     var waitLoadImageInterval = null;
@@ -81,7 +82,7 @@ app.controller('MusicApi', function (
     WpApi.albums().then( function (response) {
 
         _this.posts = response.data;
-        console.log( _this.posts );
+        // console.log( _this.posts );
         getFirstPost();
     });
 
@@ -132,7 +133,7 @@ app.controller('MusicApi', function (
 
                     _this.currentAudio = oData.tracks[0].src;
 
-                    console.log( _this.currentAudio );
+                    // console.log( _this.currentAudio );
 
                     _this.setAndPlay();
                 }
@@ -151,10 +152,15 @@ app.controller('MusicApi', function (
 
             document.getElementById('ctrlAudio').appendChild(_this.audioElement);
 
-            console.log( _this.audioElement, _this.currentAudio );
+            // console.log( _this.audioElement, _this.currentAudio );
         }
 
         audio.setAndPlay( _this.audioElement, _this.currentAudio );
+
+        $timeout(function() {
+
+            _this.wait = false;
+        }, _this.bgTransition);
     };
 
     _this.play = function() {
@@ -175,6 +181,8 @@ app.controller('MusicApi', function (
 
         console.log( 'stop sound' );
 
+        _this.wait = true;
+
         waitLoadImageInterval = $interval(function() {
             waitLoadImage += 100;
         }, 100);
@@ -194,8 +202,6 @@ app.controller('MusicApi', function (
         if( waitLoadImage > 0 ) {
 
             var iTrans = _this.bgTransition * 2;
-
-            console.log( '----------- '+ waitLoadImage );
 
             if( waitLoadImage < iTrans ) {
 
