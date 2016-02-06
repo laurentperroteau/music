@@ -16,14 +16,13 @@
         <button ng-click="music.pause()">Pause</button>
 
         <div class="content">
+            <div ng-bind-html="music.content"></div>
+
             <select
                 ng-model="music.itemSelect"
                 ng-options="post as post.title.rendered for post in music.posts track by post.id"
                 ng-change="music.updateSelect()">
-            </select>
-            
-            <div ng-bind-html="music.content"></div>
-
+            </select>            
         </div>
         <div id="ctrlAudio" class="audio"></div>
     </div>
