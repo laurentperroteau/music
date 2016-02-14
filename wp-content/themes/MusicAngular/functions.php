@@ -75,12 +75,14 @@ function enfusion_scripts()  {
     wp_register_script( 'angular', get_bloginfo('stylesheet_directory') . '/bower_components/angular/angular.min.js');
     wp_register_script( 'app', get_bloginfo('stylesheet_directory') . '/js/app.js');
     wp_register_script( 'factories', get_bloginfo('stylesheet_directory') . '/js/factories.js');
+    wp_register_script( 'directives', get_bloginfo('stylesheet_directory') . '/js/directives.js');
     wp_register_script( 'controllers', get_bloginfo('stylesheet_directory') . '/js/controllers.js');
   
     // Ahora usamos un tag condicional por agreguarlo en cola
     wp_enqueue_script( 'angular' ); 
     wp_enqueue_script( 'app' ); 
     wp_enqueue_script( 'factories' ); 
+    wp_enqueue_script( 'directives' ); 
     wp_enqueue_script( 'controllers' ); 
 }  
 add_action( 'wp_enqueue_scripts', 'enfusion_scripts' ); 
