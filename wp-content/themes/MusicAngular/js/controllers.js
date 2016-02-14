@@ -13,7 +13,7 @@ app.controller('MusicApi', function (
     _this.currentAudio = null;
     _this.image        = null;
     _this.imageLoaded = false;
-    _this.bgiApplyFilter = false;
+    _this.bgiApplyFilter = true;
     _this.bgTransition = 500;
     _this.wait = true;
 
