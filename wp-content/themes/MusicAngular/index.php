@@ -12,19 +12,19 @@
             class="bgi"
             ng-class="{'ctrlApplyFilter': music.bgiApplyFilter}"></div>
             
-        <button ng-click="music.play()">Play</button>
-        <button ng-click="music.pause()">Pause</button>
-
+        <!--<button ng-click="music.play()">Play</button>
+        <button ng-click="music.pause()">Pause</button>-->
+        
         <div 
             class="content"
             ng-class="{'ctrlWait': music.wait }">
-            <div ng-bind-html="music.content"></div>
-
             <select
                 ng-model="music.itemSelect"
                 ng-options="post as post.title.rendered for post in music.posts track by post.id"
                 ng-change="music.updateSelect()">
             </select>            
+            <div ng-bind-html="music.content"></div>
+
         </div>
         <div id="ctrlAudio" class="audio"></div>
     </div>

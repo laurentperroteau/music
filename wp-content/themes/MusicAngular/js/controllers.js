@@ -1,61 +1,3 @@
-var app = angular.module('musicApp', []);
-
-app.factory('WpApi', function ($http) {
-
-    var getAlbums = function( postId ) {
-
-        var param = postId === undefined ? '': '/'+ postId;
-
-        return $http({
-            url: 'http://music.local/wp-json/wp/v2/posts'+ param, 
-            method: 'GET'
-        });
-    };
-
-    var getImage = function( imageId ) {
-
-        var param = imageId === undefined ? '': '/'+ imageId;
-
-        return $http({
-            url: 'http://music.local/wp-json/wp/v2/media'+ param, 
-            method: 'GET'
-        });
-    };
-
-    return {
-        albums: getAlbums,
-        image: getImage
-    }
-});
-
-
-app.factory('audio',function () {
-  return {
-    setAndPlay: function( audioElement, filename ) {
-        audioElement.src = filename;
-        audioElement.play();
-    },
-    play: function( audioElement ) {
-        audioElement.play(); 
-    },
-    pause: function( audioElement ) {
-        audioElement.pause(); 
-    }
-  }
-});
-
-app.directive('imageonload', function() {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            element.bind('load', function() {
-                scope.$apply(attrs.imageonload);
-            });
-        }
-    };
-});
-
-
 app.controller('MusicApi', function (
     $scope,
     $sce, 
@@ -82,12 +24,10 @@ app.controller('MusicApi', function (
     WpApi.albums().then( function (response) {
 
         _this.posts = response.data;
-        // console.log( _this.posts );
         getFirstPost();
     });
 
     function getFirstPost() {
-        console.log( 'getFirstPost' );
 
         displayPost( _this.posts[0].id );
 
@@ -95,8 +35,6 @@ app.controller('MusicApi', function (
     }
 
     function displayPost( id ) {
-        console.log( 'displayPost' );
-
 
         WpApi.albums( id ).then( function (response) {
 
@@ -117,7 +55,6 @@ app.controller('MusicApi', function (
     }
 
     function getTrackInWpContent( sContent ) {
-        console.log( 'getTrackInWpContent' );
 
         aContent = angular.element( sContent );
 
@@ -133,8 +70,6 @@ app.controller('MusicApi', function (
 
                     _this.currentAudio = oData.tracks[0].src;
 
-                    // console.log( _this.currentAudio );
-
                     _this.setAndPlay();
                 }
             }
@@ -143,7 +78,6 @@ app.controller('MusicApi', function (
 
 
     _this.setAndPlay = function() {
-        console.log( 'setAndPlay' );
 
         if( _this.audioElement === null ) {
 
@@ -152,7 +86,6 @@ app.controller('MusicApi', function (
 
             document.getElementById('ctrlAudio').appendChild(_this.audioElement);
 
-            // console.log( _this.audioElement, _this.currentAudio );
         }
 
         audio.setAndPlay( _this.audioElement, _this.currentAudio );
@@ -164,13 +97,11 @@ app.controller('MusicApi', function (
     };
 
     _this.play = function() {
-        console.log( 'play' );
 
         audio.play( _this.audioElement );
     };
 
     _this.pause = function() {
-        console.log( 'pause' );
 
         if( _this.audioElement === null ) return false;
 
@@ -178,8 +109,6 @@ app.controller('MusicApi', function (
     };
 
     _this.updateSelect = function() {
-
-        console.log( 'stop sound' );
 
         _this.wait = true;
 
@@ -205,7 +134,6 @@ app.controller('MusicApi', function (
 
             if( waitLoadImage < iTrans ) {
 
-                console.log( 'wait before load image' );
                 $timeout(function() {
 
                     cancelWait();
