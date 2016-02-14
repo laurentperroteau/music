@@ -7,3 +7,10 @@
 
 #Configuration
 /wp-config.php
+
+#Others
+wp-content/backup-a454f/
+wp-content/themes/Music/
+wp-content/themes/twentyeleven/
+wp-content/themes/twentyten/
+
