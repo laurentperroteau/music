@@ -3,7 +3,9 @@
 
 #Contenus non versionnés
 /wp-content/uploads/
-/wp-content/plugins/
+/wp-content/plugins/*
+!/wp-content/plugins/wp-api-2.0-beta10
+
 
 #Configuration
 /wp-config.php
