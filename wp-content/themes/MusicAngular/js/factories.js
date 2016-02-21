@@ -5,7 +5,7 @@ app.factory('WpApi', function ($http) {
         var param = postId === undefined ? '': '/'+ postId;
 
         return $http({
-            url: 'http://music.local/wp-json/wp/v2/posts'+ param, 
+            url: location.origin + '/wp-json/wp/v2/posts'+ param, 
             method: 'GET'
         });
     };
@@ -15,7 +15,7 @@ app.factory('WpApi', function ($http) {
         var param = imageId === undefined ? '': '/'+ imageId;
 
         return $http({
-            url: 'http://music.local/wp-json/wp/v2/media'+ param, 
+            url: location.origin + '/wp-json/wp/v2/media'+ param, 
             method: 'GET'
         });
     };
