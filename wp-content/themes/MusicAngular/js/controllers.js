@@ -23,6 +23,8 @@ app.controller('MusicApi', function (
 
     WpApi.albums().then( function (response) {
 
+        console.log( response );
+
         _this.posts = response.data;
         getFirstPost();
     });
