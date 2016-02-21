@@ -2,7 +2,7 @@ app.factory('WpApi', function ($http) {
 
     var getAlbums = function( postId ) {
 
-        var param = postId === undefined ? '': '/'+ postId;
+        var param = postId === undefined ? '?filter[posts_per_page]=-1': '/'+ postId;
 
         return $http({
             url: location.origin + '/wp-json/wp/v2/posts'+ param, 
