@@ -33,7 +33,7 @@
 /***
  * Aqui se pone los custom field para los post y las page
  */
-include 'inc/custom-meta.php';
+// include 'inc/custom-meta.php';
 
 /***
  * Incluir todos los ficheros que deberian estar en el function.php
@@ -43,6 +43,7 @@ include 'inc/custom-meta.php';
 //Para incluir este fichero, vaciar el function.php de twentyeleven
 //include (STYLESHEETPATH . "/inc/twentyeleven_functions.php");
 
+add_theme_support( 'post-thumbnails' );
 
 /***
  * MUY IMPORTANTE - Cuando usamos un plugin jQuery (un slideshow por ejemplo), 
