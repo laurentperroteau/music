@@ -17,4 +17,7 @@ wp-content/backup-a454f/
 wp-content/themes/Music/
 wp-content/themes/twentyeleven/
 wp-content/themes/twentyten/
+bower_components
 INSTALL.md
+*.sublime-project
+*.sublime-workspace
