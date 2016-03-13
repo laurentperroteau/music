@@ -5,7 +5,8 @@ app.controller('MusicApi', function (
     audio,
     $document,
     $timeout,
-    $interval
+    $interval,
+    $location
 ){
 
     var _this = this;
@@ -23,17 +24,31 @@ app.controller('MusicApi', function (
 
     WpApi.albums().then( function (response) {
 
-        console.log( response );
-
         _this.posts = response.data;
         getFirstPost();
     });
 
     function getFirstPost() {
 
-        displayPost( _this.posts[0].id );
+        var iKeyPost = 0;
 
-        _this.itemSelect = _this.posts[0];
+        // Check if url is the same as post
+        if( $location.path() !== '' ) {
+
+            var sCurrentPath = $location.$$absUrl;
+
+            angular.forEach( _this.posts, function(oPost, key) {
+
+                if( oPost.link == sCurrentPath ) {
+
+                    iKeyPost = key;
+                }
+            });            
+        }
+
+        displayPost( _this.posts[ iKeyPost ].id );
+
+        _this.itemSelect = _this.posts[ iKeyPost ];
     }
 
     function displayPost( id ) {
@@ -53,6 +68,8 @@ app.controller('MusicApi', function (
                 _this.image = response.data.source_url;
                 _this.bgiApplyFilter = true;
             });
+
+            $location.url( _this.post.slug );
         });
     }
 
