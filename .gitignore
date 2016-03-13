@@ -1,18 +1,20 @@
-#Installation Wordpress
+
+# WP install
 /wp-cms/*
 
-#Contenus non versionnés
+# Content 
 /wp-content/uploads/
 /wp-content/plugins/*
 !/wp-content/plugins/wp-api-2.0-beta10
 
 
-#Configuration
+# Config
 /wp-config.php
+.htaccess
 
 #Others
 wp-content/backup-a454f/
 wp-content/themes/Music/
 wp-content/themes/twentyeleven/
 wp-content/themes/twentyten/
-
+INSTALL.md
