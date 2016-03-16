@@ -50,6 +50,8 @@ table {
 
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,400italic);
 
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}:before,:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+
 /*global*/
 html {
   font:normal 62.5%/2em 'Lato',sans-serif;
@@ -106,18 +108,16 @@ li {
 /*content*/
 #primary {
     position: relative;
-    width: 350px;
-    margin: 0 auto;
+    width: 100%;
     text-align: left;
 }
 
 .content {
     position: absolute;
-    /* bottom: 100px; */
-    top: calc(100% - 470px);
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
-    width: 400px;
+    width: 100%;
     padding: 25px;
     background: #eee;
     border: 2px solid black;
@@ -138,12 +138,6 @@ li {
     max-height: 0; 
     opacity: 0;
     margin-bottom: 0;
-}
-
-.content:hover > .ng-binding > p {
-    max-height: 150px; 
-    opacity: 1;
-    margin-bottom: 15px;
 }
 
 audio {
@@ -252,4 +246,33 @@ select option {
 
 button {
     display: none;
+}
+
+@media screen and (min-width:768px) {
+    
+    #primary {
+        position: relative;
+        width: 350px;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    .content {
+        position: absolute;
+        bottom: auto;
+        top: calc(100% - 470px);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 400px;
+        padding: 25px;
+        background: #eee;
+        border: 2px solid black;
+        text-align: left;
+    }
+
+    .content:hover > .ng-binding > p {
+        max-height: 150px; 
+        opacity: 1;
+        margin-bottom: 15px;
+    }
 }

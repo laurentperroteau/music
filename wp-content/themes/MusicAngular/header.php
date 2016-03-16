@@ -12,6 +12,7 @@
 <html <?php language_attributes(); ?> style="margin: 0 !important">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title><?php
 	/*
 	 * Print the <title> tag based on what is being viewed.
