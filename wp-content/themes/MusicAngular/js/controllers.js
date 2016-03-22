@@ -181,4 +181,28 @@ app.controller('MusicApi', function (
             _this.bgiApplyFilter = false;
         }
     };
+
+    var iPageView = null;
+
+    $scope.$on("$locationChangeStart", function() {
+
+        if( $location.path() == '/' ) {
+
+            iPageView = 'firstView';
+        }
+        else if( iPageView === null ) {
+
+            iPageView = 'firstView';
+        }
+        else if( iPageView == 'firstView' ) {
+
+            iPageView = 'endFirstView';
+        }
+        else {
+
+            if (typeof ga == 'function') {
+                ga('send', 'pageview', $location.path());
+            }
+        }
+    });
 });
