@@ -52,10 +52,6 @@ app.controller('MusicApi', function (
         }
 
         setNewPost( iKeyPost );
-
-        // Launch events
-        onKeypressSpace();
-        onAudioEnd();
     }
 
     /**
@@ -116,6 +112,10 @@ app.controller('MusicApi', function (
             });
 
             $location.url( _this.post.slug );
+
+            // Launch events
+            onKeypressSpace();
+            onAudioEnd();
         });
     }
 
@@ -276,7 +276,7 @@ app.controller('MusicApi', function (
             }
         }
     });
-    
+
 
     /**
      * Event function
