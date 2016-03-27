@@ -70,6 +70,8 @@ app.controller('MusicApi', function (
             });
 
             $location.url( _this.post.slug );
+
+            pauseKeypressSpace();
         });
     }
 
@@ -124,7 +126,12 @@ app.controller('MusicApi', function (
 
         if( _this.audioElement === null ) return false;
 
-        audio.pause( _this.audioElement );
+        if( !_this.audioElement.paused ) {
+            audio.pause( _this.audioElement );
+        }
+        else {
+            _this.play();
+        }
     };
 
     _this.updateSelect = function() {
@@ -205,4 +212,15 @@ app.controller('MusicApi', function (
             }
         }
     });
+
+    function pauseKeypressSpace() {
+
+        document.body.onkeyup = function(e) {
+
+            if( e.keyCode == 32 ){
+
+                _this.pause();
+            }
+        }
+    }
 });
