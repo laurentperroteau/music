@@ -29,10 +29,4 @@
         <div id="ctrlAudio" class="audio"></div>
     </div>
 
-<script type="text/javascript">
-    window.onbeforeunload = function() {
-        return "Es-tu sûr de vouloir recharger la page ? Parce que ça ne sert absolument à rien, et tu vas perdre la lecture en cours !!!";
-    }
-</script>
-
 <?php get_footer(); ?>
