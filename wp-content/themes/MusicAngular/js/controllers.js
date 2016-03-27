@@ -12,22 +12,27 @@ app.controller('MusicApi', function (
     var _this = this;
     _this.audioElement = null;
     _this.currentAudio = null;
+    _this.currentId    = null;
     _this.image        = null;
-    _this.imageLoaded = false;
+    _this.imageLoaded  = false;
     _this.bgiApplyFilter = true;
     _this.bgTransition = 500;
-    _this.wait = true;
+    _this.wait         = true;
 
     var waitLoadImage = 0;
     var waitLoadImageInterval = null;
 
-
+    // At first, get all post
     WpApi.albums().then( function (response) {
 
         _this.posts = response.data;
         getFirstPost();
     });
 
+    /**
+     * Get first post (after getting all post)
+     * =======================================
+     */
     function getFirstPost() {
 
         var iKeyPost = 0;
@@ -46,12 +51,53 @@ app.controller('MusicApi', function (
             });            
         }
 
+        setNewPost( iKeyPost );
+
+        // Launch events
+        onKeypressSpace();
+        onAudioEnd();
+    }
+
+    /**
+     * Get next post to play
+     * =====================
+     */
+    function getNextPost() {
+
+        var iKeyPost = 0;
+
+        angular.forEach( _this.posts, function(oPost, key) {
+
+            if( oPost.id == _this.currentId ) {
+
+                iKeyPost = key + 1;
+                return false;
+            }
+        });            
+
+        setNewPost( iKeyPost );
+    }
+
+    /**
+     * Set new post
+     * ============
+     * @param {int} iKeyPost => key of array post
+     */
+    function setNewPost( iKeyPost ) {
+        
         displayPost( _this.posts[ iKeyPost ].id );
 
         _this.itemSelect = _this.posts[ iKeyPost ];
     }
 
+    /**
+     * Display post (get content of post, image and slug)
+     * =================================================
+     * @param  {int} id => id to displayed
+     */
     function displayPost( id ) {
+
+        _this.currentId = id;
 
         WpApi.albums( id ).then( function (response) {
 
@@ -70,11 +116,14 @@ app.controller('MusicApi', function (
             });
 
             $location.url( _this.post.slug );
-
-            pauseKeypressSpace();
         });
     }
 
+    /**
+     * Get track in json data Worspress content
+     * ========================================
+     * @param  {string} sContent => string html
+     */
     function getTrackInWpContent( sContent ) {
 
         aContent = angular.element( sContent );
@@ -98,6 +147,11 @@ app.controller('MusicApi', function (
     }
 
 
+    /**
+     * Audio events functions
+     * ======================
+     */
+    
     _this.setAndPlay = function() {
 
         if( _this.audioElement === null ) {
@@ -146,6 +200,11 @@ app.controller('MusicApi', function (
         displayPost( _this.itemSelect.id );
     };
 
+
+    /**
+     * Show image when new image loaded (and if css transition end)
+     * ============================================================
+     */
     $scope.newImageLoaded = function() {
 
         /*
@@ -189,8 +248,13 @@ app.controller('MusicApi', function (
         }
     };
 
+
     var iPageView = null;
 
+    /**
+     * Set page view on GA
+     * ===================
+     */
     $scope.$on("$locationChangeStart", function() {
 
         if( $location.path() == '/' ) {
@@ -212,8 +276,14 @@ app.controller('MusicApi', function (
             }
         }
     });
+    
 
-    function pauseKeypressSpace() {
+    /**
+     * Event function
+     * ==============
+     */
+    
+    function onKeypressSpace() {
 
         document.body.onkeyup = function(e) {
 
@@ -222,5 +292,12 @@ app.controller('MusicApi', function (
                 _this.pause();
             }
         }
+    }
+
+    function onAudioEnd() {
+
+        if( _this.audioElement === null ) return false;
+
+        _this.audioElement.addEventListener('ended', getNextPost);
     }
 });
