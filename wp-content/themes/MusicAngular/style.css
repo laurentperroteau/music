@@ -124,6 +124,11 @@ li {
     text-align: left;
 }
 
+.content ul li:nth-child(even) {
+    margin-bottom: 8px;
+}
+
+
 .content *:not(select) {
     -webkit-transition: all 0.5s ease;
             transition: all 0.5s ease;
