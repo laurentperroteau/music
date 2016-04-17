@@ -23,12 +23,11 @@
             <div ng-bind-html="music.content"></div>
 
         </div>
-        <div class="audio">
-            <m-audio 
-                m-src="music.audio.src" 
-                m-pause="music.audio.false"
-                m-audio-end="music.onAudioEnd()" /> 
-        </div>
+        <m-audio 
+            m-src="music.audio.src" 
+            m-pause="music.audio.false"
+            m-audio-end="music.onAudioEnd()"
+            class="audio" /> 
     </div>
 
 <?php get_footer(); ?>
