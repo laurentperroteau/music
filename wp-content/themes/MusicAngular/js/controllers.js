@@ -2,7 +2,6 @@ app.controller('MusicApi', function (
     $scope,
     $sce, 
     WpApi,
-    audio,
     $document,
     $timeout,
     $interval,
@@ -10,20 +9,25 @@ app.controller('MusicApi', function (
 ){
 
     var _this = this;
-    _this.audioElement = null;
+
     _this.currentAudio = null;
     _this.currentId    = null;
     _this.image        = null;
     _this.imageLoaded  = false;
     _this.bgiApplyFilter = true;
     _this.bgTransition = 500;
-    _this.wait         = true;
+
+    // Audio tag
+    _this.audio       = {};
+    _this.audio.src   = null;
+    _this.audio.pause = false;
+    _this.audio.wait  = true;
 
     var waitLoadImage = 0;
     var waitLoadImageInterval = null;
 
     // At first, get all post
-    WpApi.albums().then( function (response) {
+    WpApi.albums().then( function(response) {
 
         _this.posts = response.data;
         getFirstPost();
@@ -115,7 +119,6 @@ app.controller('MusicApi', function (
 
             // Launch events
             onKeypressSpace();
-            onAudioEnd();
         });
     }
 
@@ -154,43 +157,29 @@ app.controller('MusicApi', function (
     
     _this.setAndPlay = function() {
 
-        if( _this.audioElement === null ) {
-
-            _this.audioElement = $document[0].createElement('audio');
-            _this.audioElement.setAttribute('controls',true)
-
-            document.getElementById('ctrlAudio').appendChild(_this.audioElement);
-
-        }
-
-        audio.setAndPlay( _this.audioElement, _this.currentAudio );
+        _this.audio.src = _this.currentAudio;
 
         $timeout(function() {
 
-            _this.wait = false;
+            _this.audio.wait = false;
         }, _this.bgTransition);
     };
 
     _this.play = function() {
 
-        audio.play( _this.audioElement );
+        _this.audio.pause = false;
     };
 
     _this.pause = function() {
 
-        if( _this.audioElement === null ) return false;
+        if( _this.audio.src === null ) return false;
 
-        if( !_this.audioElement.paused ) {
-            audio.pause( _this.audioElement );
-        }
-        else {
-            _this.play();
-        }
+        _this.audio.pause = !_this.audio.pause;
     };
 
     _this.updateSelect = function() {
 
-        _this.wait = true;
+        _this.audio.wait = true;
 
         waitLoadImageInterval = $interval(function() {
             waitLoadImage += 100;
@@ -199,6 +188,13 @@ app.controller('MusicApi', function (
         _this.setAndPlay();
         displayPost( _this.itemSelect.id );
     };
+
+    _this.onAudioEnd = function() {
+
+        if( _this.audio.src === null ) return false;
+
+        getNextPost();
+    }
 
 
     /**
@@ -292,12 +288,5 @@ app.controller('MusicApi', function (
                 _this.pause();
             }
         }
-    }
-
-    function onAudioEnd() {
-
-        if( _this.audioElement === null ) return false;
-
-        _this.audioElement.addEventListener('ended', getNextPost);
     }
 });
