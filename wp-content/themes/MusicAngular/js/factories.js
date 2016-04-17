@@ -1,3 +1,8 @@
+
+/**
+ * Wordpress API Service: return post and media
+ * ============================================
+ */
 app.factory('WpApi', function ($http) {
 
     var getAlbums = function( postId ) {
@@ -23,21 +28,5 @@ app.factory('WpApi', function ($http) {
     return {
         albums: getAlbums,
         image: getImage
-    }
-});
-
-
-app.factory('audio',function () {
-    return {
-        setAndPlay: function( audioElement, filename ) {
-            audioElement.src = filename;
-            audioElement.play();
-        },
-        play: function( audioElement ) {
-            audioElement.play(); 
-        },
-        pause: function( audioElement ) {
-            audioElement.pause(); 
-        }
     }
 });

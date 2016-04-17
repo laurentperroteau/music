@@ -2,7 +2,6 @@ app.controller('MusicApi', function (
     $scope,
     $sce, 
     WpApi,
-    audio,
     $document,
     $timeout,
     $interval,
