@@ -21,8 +21,7 @@ app.directive('imageonload', function() {
 app.directive('mAudio', function() {
     return {
         restrict: 'E',
-        replace: true,
-        template: '<audio controls="true" pause="{{ pause }}" class="audio" src="{{ src }}" audio-end=""></audio>',
+        template: '<audio controls="true" pause="{{ pause }}" src="{{ src }}" audio-end=""></audio>',
         scope: {
             mSrc: '=', // pass song
             mPause: '=', // true to pause song
